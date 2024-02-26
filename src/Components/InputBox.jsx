@@ -37,6 +37,8 @@ const Wrapper = styled.div`
 const Upper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width: 80%;
   gap: 10px;
   padding: 20px 0 0 0;
   > input {
@@ -48,22 +50,22 @@ const Upper = styled.div`
 
 const NameInput = styled.input`
   height: 25px;
-  width: 300px;
+  width: 30%;
   border: none;
 `;
 
 const PwInput = styled.input`
-  width: 300px;
+  width: 30%;
   height: 25px;
   border: none;
 `;
 const TitleInput = styled.input`
-  width: 300px;
+  width: 30%;
   height: 25px;
   border: none;
 `;
 const CommentInput = styled.input`
-  width: 1000px;
+  width: 80%;
   height: 25px;
   border: none;
   margin: 10px 0 0 0;
