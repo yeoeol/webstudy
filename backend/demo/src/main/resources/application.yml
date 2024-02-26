@@ -1,1 +1,16 @@
+server:
+  port: 8080
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/heritage?serverTimezone=Asia/Seoul
+    username: root
+    password: itbiz
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
