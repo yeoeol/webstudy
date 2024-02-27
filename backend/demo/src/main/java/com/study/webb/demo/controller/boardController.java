@@ -99,4 +99,16 @@ public class boardController {
 
         return new ResponseEntity<>(new BoardResult(boardResponse), HttpStatus.OK);
     }
+
+    @PatchMapping("/{boardNum}/like")
+    public ResponseEntity<BoardResult> likeUpdate(@PathVariable Long boardNum, @RequestBody LikeRequest request) {
+        BoardEntity board = service.updateOneLike(boardNum, request);
+
+        BoardResponse boardResponse = new BoardResponse(
+                board.getBoardNum(), board.getUserName(), board.getPw(),
+                board.getSector(), board.getTitle(), board.getComment(), board.getLikeCount()
+        );
+
+        return new ResponseEntity<>(new BoardResult(boardResponse), HttpStatus.OK);
+    }
 }
