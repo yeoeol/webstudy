@@ -60,4 +60,9 @@ public class boardService {
         }
         return board;
     }
+
+    @Transactional
+    public void deleteOne(Long boardNum) {
+        repository.deleteById(boardNum);
+    }
 }

@@ -111,4 +111,10 @@ public class boardController {
 
         return new ResponseEntity<>(new BoardResult(boardResponse), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{boardNum}")
+    public ResponseEntity deleteOne(@PathVariable Long boardNum) {
+        service.deleteOne(boardNum);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
