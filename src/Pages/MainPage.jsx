@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import InputBox from "../Components/InputBox";
-import BoardBox from "../Components/BoardBox";
+import BoardList from "../Components/BoardList";
 import BestBoardList from "../Components/BestBoardList";
 
 const MainPage = () => {
@@ -8,7 +8,7 @@ const MainPage = () => {
     <>
       <BestBoardList />
       <InputBox />
-      <BoardBox />
+      <BoardList />
     </>
   );
 };

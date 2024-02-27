@@ -1,27 +1,43 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-const BoardBox = () => {
+const BoardList = () => {
   const navigate = useNavigate();
   const getEditPage = () => {
     navigate(`/edit`);
   };
   return (
     <Wrapper>
+      <Header>글 목록</Header>
       <Head>
         <HeadName>이름</HeadName>
         <HeadGenre>분류</HeadGenre>
         <HeadTitle>제목</HeadTitle>
         <HeadReview>한줄평</HeadReview>
       </Head>
+      <Virtual></Virtual>
       <ul>
-        <BoardCard onClick={getEditPage}>
-          <Name>헤르미온느</Name>
-          <Genre>영화</Genre>
-          <Title>해리포터</Title>
-          <Review>재밌다</Review>
+        <BoardCard>
+          <Name onClick={getEditPage}>헤르미온느</Name>
+          <Genre onClick={getEditPage}>영화</Genre>
+          <Title onClick={getEditPage}>해리포터</Title>
+          <Review onClick={getEditPage}>재밌다</Review>
           <Buttons>
-            <button>g</button>
-            <button>b</button>
+            <button>
+              <img
+                src="../images/like"
+                height="15px"
+                width="15px"
+                alt="좋아요"
+              />
+            </button>
+            <button>
+              <img
+                src="../images/unlike"
+                height="15px"
+                width="15px"
+                alt="싫어요"
+              />
+            </button>
           </Buttons>
         </BoardCard>
       </ul>
@@ -29,11 +45,15 @@ const BoardBox = () => {
   );
 };
 
-export default BoardBox;
+export default BoardList;
+
+const Header = styled.h3`
+  text-align: center;
+`;
 
 const Wrapper = styled.div`
   width: 100%;
-  background-color: aliceblue;
+  background-color: transparent;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -41,7 +61,13 @@ const Wrapper = styled.div`
   > ul {
     width: 80%;
     padding: 0 0 0 0;
+    margin: 0 0 0 0;
   }
+`;
+const Virtual = styled.div`
+  width: 80%;
+  height: 10px;
+  border-bottom: 1px solid #dbdbdb;
 `;
 const Head = styled.div`
   font-weight: bold;
@@ -91,10 +117,15 @@ const Buttons = styled.div`
   margin: auto;
   display: flex;
   flex-direction: row;
+  gap: 10px;
 `;
 const BoardCard = styled.li`
   margin: auto;
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  border-bottom: 1px solid #dbdbdb;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin: 0 0 0 0;
 `;
