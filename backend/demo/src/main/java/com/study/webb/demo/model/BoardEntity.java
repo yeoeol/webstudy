@@ -1,10 +1,7 @@
 package com.study.webb.demo.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "BOARD")
 @Entity
 public class BoardEntity {
 
