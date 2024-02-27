@@ -11,12 +11,10 @@ import java.time.LocalDateTime;
 public class BoardResponse {
 
     private Long boardNum;
-
     private String userName;
-
+    private String pw;
     private String Sector;
     private String title;
     private String comment;
     private Long likeCount;
-    private LocalDateTime writeDate;
 }
