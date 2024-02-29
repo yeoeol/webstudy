@@ -1,10 +1,19 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 const BoardList = () => {
   const navigate = useNavigate();
   const getEditPage = () => {
     navigate(`/edit`);
   };
+  const getBoardList = async () => {
+    const data = await axios.get("/board");
+    console.log(data);
+  };
+  useEffect(() => {
+    getBoardList();
+  }, []);
   return (
     <Wrapper>
       <Header>글 목록</Header>
