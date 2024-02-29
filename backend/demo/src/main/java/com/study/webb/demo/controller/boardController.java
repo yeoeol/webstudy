@@ -79,8 +79,14 @@ public class boardController {
     @GetMapping("/{boardNum}/check")
     public ResponseEntity<BoardResult> checkPassword(@PathVariable Long boardNum, @RequestBody BoardRequest request) {
         BoardEntity board = service.searchOne(boardNum);
+
         if (board.getPw().equals(request.getPw())) {
-            return new ResponseEntity<>(new BoardResult(board), HttpStatus.OK);
+            BoardResponse boardResponse = new BoardResponse(
+                    board.getBoardNum(), board.getUserName(), board.getPw(),
+                    board.getSector(), board.getTitle(), board.getComment(), board.getLikeCount()
+            );
+
+            return new ResponseEntity<>(new BoardResult(boardResponse), HttpStatus.OK);
         }
         return null;
     }

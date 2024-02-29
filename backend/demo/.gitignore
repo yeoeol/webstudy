@@ -27,6 +27,9 @@ out/
 !**/src/test/**/out/
 .gradle
 build
+*.yml
+application-prod.yml
+
 
 ### NetBeans ###
 /nbproject/private/
