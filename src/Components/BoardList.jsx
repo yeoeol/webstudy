@@ -1,16 +1,20 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import BoardCard from "./BoardCard";
 const BoardList = () => {
-  const navigate = useNavigate();
-  const getEditPage = () => {
-    navigate(`/edit`);
-  };
+  const [boardList, setBoardList] = useState([]);
   const getBoardList = async () => {
     const data = await axios.get("/board");
     console.log(data);
+    setBoardList(data.data.data);
   };
+  // useEffect(() => {
+  //   if (boardList.length > 0) {
+  //     console.log(boardList[0].comment);
+  //   }
+  // }, [boardList]);
   useEffect(() => {
     getBoardList();
   }, []);
@@ -25,30 +29,17 @@ const BoardList = () => {
       </Head>
       <Virtual></Virtual>
       <ul>
-        <BoardCard>
-          <Name onClick={getEditPage}>헤르미온느</Name>
-          <Genre onClick={getEditPage}>영화</Genre>
-          <Title onClick={getEditPage}>해리포터</Title>
-          <Review onClick={getEditPage}>재밌다</Review>
-          <Buttons>
-            <button>
-              <img
-                src="../images/like"
-                height="15px"
-                width="15px"
-                alt="좋아요"
-              />
-            </button>
-            <button>
-              <img
-                src="../images/unlike"
-                height="15px"
-                width="15px"
-                alt="싫어요"
-              />
-            </button>
-          </Buttons>
-        </BoardCard>
+        {boardList.map((post) => (
+          <BoardCard
+            key={post.boardNum}
+            comment={post.comment}
+            likeCount={post.likeCount}
+            pw={post.pw}
+            sector={post.sector}
+            title={post.title}
+            userName={post.userName}
+          />
+        ))}
       </ul>
     </Wrapper>
   );
@@ -104,37 +95,4 @@ const HeadReview = styled.p`
   margin: auto;
   width: 50%;
   margin: 0;
-`;
-
-const Name = styled.p`
-  margin: auto;
-  width: 15%;
-`;
-const Genre = styled.p`
-  margin: auto;
-  width: 10%;
-`;
-const Title = styled.p`
-  margin: auto;
-  width: 20%;
-`;
-const Review = styled.p`
-  margin: auto;
-  width: 50%;
-`;
-const Buttons = styled.div`
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-`;
-const BoardCard = styled.li`
-  margin: auto;
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid #dbdbdb;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  margin: 0 0 0 0;
 `;
