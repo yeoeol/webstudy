@@ -7,6 +7,12 @@ const BoardCard = ({ comment, likeCount, pw, sector, title, userName }) => {
     navigate(`/edit`);
   };
   const [like, setLike] = useState(likeCount);
+
+  const minusCount = () => {
+    if (like > 0) {
+      setLike((prev) => prev - 1);
+    }
+  };
   return (
     <Card>
       <Name onClick={getEditPage}>{userName}</Name>
@@ -18,7 +24,7 @@ const BoardCard = ({ comment, likeCount, pw, sector, title, userName }) => {
           <img src="../images/like" height="15px" width="15px" alt="좋아요" />
         </button>
         {like}
-        <button onClick={() => setLike((prev) => prev - 1)}>
+        <button onClick={minusCount}>
           <img src="../images/unlike" height="15px" width="15px" alt="싫어요" />
         </button>
       </Buttons>

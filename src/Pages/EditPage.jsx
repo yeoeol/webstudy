@@ -1,18 +1,64 @@
 import styled from "styled-components";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const EditPage = () => {
+  const navigate = useNavigate();
+  const getEditPage = () => {
+    navigate("/edit");
+  };
+  const [inputData, setInputData] = useState({
+    comment: "",
+    likeCount: 0,
+    pw: "",
+    sector: "",
+    title: "",
+    userName: "",
+  });
+  const handleChange = (e) => {
+    setInputData({
+      ...inputData,
+      [e.target.name]: e.target.value,
+    });
+    // console.log(inputData);
+  };
+  const handleDelete = (e) => {
+    e.preventDefault();
+    axios.delete("/board/{:}");
+  };
   return (
     <Wrap>
       <Wrapper>
         <Upper>
-          <NameInput placeholder="name" />
-          <PwInput placeholder="pw" />
-          <TitleInput placeholder="title" />
+          <NameInput
+            name="userName"
+            placeholder="name"
+            value={inputData.userName}
+            onChange={handleChange}
+          />
+          <PwInput
+            name="pw"
+            placeholder="pw"
+            value={inputData.pw}
+            onChange={handleChange}
+          />
+          <TitleInput
+            name="title"
+            placeholder="title"
+            value={inputData.title}
+            onChange={handleChange}
+          />
         </Upper>
-        <CommentInput placeholder="comment" />
+        <CommentInput
+          name="comment"
+          placeholder="comment"
+          value={inputData.comment}
+          onChange={handleChange}
+        />
         <Buttons>
           <Button>수정</Button>
-          <Button>삭제</Button>
+          <Button onClick={handleDelete}>삭제</Button>
         </Buttons>
       </Wrapper>
     </Wrap>
