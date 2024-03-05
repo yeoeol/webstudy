@@ -20,7 +20,7 @@ const RouterComponent = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/edit" element={<EditPage />}></Route>
+          <Route path="/edit/:boardNum" element={<EditPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

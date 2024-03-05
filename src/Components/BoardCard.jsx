@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-const BoardCard = ({ comment, likeCount, pw, sector, title, userName }) => {
+const BoardCard = ({ boardNum, comment, likeCount, pw, sector, title, userName }) => {
   const navigate = useNavigate();
   const getEditPage = () => {
-    navigate(`/edit`);
+    navigate(`/edit/${boardNum}`);
   };
   const [like, setLike] = useState(likeCount);
 

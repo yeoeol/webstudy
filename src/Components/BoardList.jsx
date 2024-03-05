@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BoardCard from "./BoardCard";
+
 const BoardList = () => {
   const [boardList, setBoardList] = useState([]);
   const getBoardList = async () => {

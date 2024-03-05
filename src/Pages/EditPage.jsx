@@ -1,13 +1,22 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditPage = () => {
   const navigate = useNavigate();
-  const getEditPage = () => {
-    navigate("/edit");
+  const { boardNum } = useParams();
+  const [edit, setEdit] = useState([]);
+  const cardData = async () => {
+    const data = await axios.get(`/board/${boardNum}`);
+    setEdit(data.data);
   };
+  useEffect(() => {
+    cardData();
+    // console.log("success");
+  }, []);
+  console.log(edit);
+
   const [inputData, setInputData] = useState({
     comment: "",
     likeCount: 0,
@@ -23,9 +32,24 @@ const EditPage = () => {
     });
     // console.log(inputData);
   };
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    axios.delete("/board/{:}");
+    try {
+      await axios.delete(`/board/${boardNum}`);
+      navigate("/"); // 삭제 후 홈페이지로 이동
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`/board/${boardNum}`, inputData);
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
   };
   return (
     <Wrap>
@@ -57,7 +81,7 @@ const EditPage = () => {
           onChange={handleChange}
         />
         <Buttons>
-          <Button>수정</Button>
+          <Button onClick={handleEdit}>수정</Button>
           <Button onClick={handleDelete}>삭제</Button>
         </Buttons>
       </Wrapper>

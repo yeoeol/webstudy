@@ -1,17 +1,32 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import BestBoardCard from "./BestBoardCard";
 
 const BestBoardList = () => {
+  const [best, setBest] = useState([]);
+  const getBestBoardList = async () => {
+    const data = await axios.get("/board/best");
+    setBest(data.data.data);
+  };
+  useEffect(() => {
+    getBestBoardList();
+  }, []);
+  console.log(best);
   return (
     <Wrapper>
       <Header>Top 3</Header>
       <ul>
-        <BestBoardCard>
-          <Rank>1위</Rank>
-          <Title>해리포터와 비밀의 방</Title>
-          <Genre>영화</Genre>
-          <Review>"good"</Review>
-          <Name>From </Name>
-        </BestBoardCard>
+        {best.map((post) => (
+          <BestBoardCard
+            key={post.boardNum}
+            comment={post.comment}
+            sector={post.sector}
+            title={post.title}
+            userName={post.userName}
+            like={post.likeCount}
+          />
+        ))}
       </ul>
     </Wrapper>
   );
@@ -27,8 +42,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   > ul {
-    width: 80%;
     padding: 0 0 0 0;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
   }
 `;
 const Header = styled.div`
@@ -37,33 +54,4 @@ const Header = styled.div`
   font-size: 30px;
   height: 40px;
   color: #004600;
-`;
-const Rank = styled.p`
-  padding: 0 0 0 0;
-  margin: 5px 0 15px 5px;
-`;
-const Title = styled.span`
-  font-weight: bold;
-  margin: 0 auto 5px 5px;
-`;
-const Genre = styled.span`
-  color: #929292;
-  margin: 0 0 20px 5px;
-`;
-
-const Review = styled.p`
-  margin: 0 auto 10px 5px;
-`;
-const Name = styled.p`
-  height: 20%;
-  margin-left: 5px;
-`;
-const BestBoardCard = styled.li`
-  list-style-type: none;
-  background-color: white;
-  height: 200px;
-  width: 200px;
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
 `;
