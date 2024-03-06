@@ -1,31 +1,47 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-const BoardCard = ({ boardNum, comment, likeCount, pw, sector, title, userName }) => {
+import { useEffect, useState } from "react";
+
+import likeImage from "../images/like.png";
+import unlikeImage from "../images/unlike.png";
+
+const BoardCard = ({
+  boardNum,
+  comment,
+  likeCount,
+  pw,
+  sector,
+  title,
+  userName,
+}) => {
   const navigate = useNavigate();
   const getEditPage = () => {
     navigate(`/edit/${boardNum}`);
   };
   const [like, setLike] = useState(likeCount);
 
-  const minusCount = () => {
-    if (like > 0) {
-      setLike((prev) => prev - 1);
-    }
+  const handleCount = (num, e) => {
+    setLike((prev) => prev + num);
+    e.stopPropagation();
   };
+
+  useEffect(() => {
+    console.log(boardNum);
+  }, []);
+
   return (
-    <Card>
-      <Name onClick={getEditPage}>{userName}</Name>
-      <Genre onClick={getEditPage}>{sector}</Genre>
-      <Title onClick={getEditPage}>{title}</Title>
-      <Review onClick={getEditPage}>{comment}</Review>
+    <Card onClick={getEditPage}>
+      <Name>{userName}</Name>
+      <Genre>{sector}</Genre>
+      <Title>{title}</Title>
+      <Review>{comment}</Review>
       <Buttons>
-        <button onClick={() => setLike((prev) => prev + 1)}>
-          <img src="../images/like" height="15px" width="15px" alt="좋아요" />
+        <button onClick={(e) => handleCount(1, e)}>
+          <img src={likeImage} height="15px" width="15px" alt="좋아요" />
         </button>
         {like}
-        <button onClick={minusCount}>
-          <img src="../images/unlike" height="15px" width="15px" alt="싫어요" />
+        <button onClick={(e) => handleCount(-1, e)}>
+          <img src={unlikeImage} height="15px" width="15px" alt="싫어요" />
         </button>
       </Buttons>
     </Card>
@@ -65,4 +81,9 @@ const Card = styled.li`
   padding-bottom: 10px;
   padding-top: 10px;
   margin: 0 0 0 0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+  }
 `;
