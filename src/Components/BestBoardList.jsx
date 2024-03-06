@@ -12,7 +12,7 @@ const BestBoardList = () => {
   useEffect(() => {
     getBestBoardList();
   }, []);
-  console.log(best);
+
   return (
     <Wrapper>
       <Header>Top 3</Header>
@@ -20,6 +20,7 @@ const BestBoardList = () => {
         {best.map((post) => (
           <BestBoardCard
             key={post.boardNum}
+            boardNum={post.boardNum}
             comment={post.comment}
             sector={post.sector}
             title={post.title}

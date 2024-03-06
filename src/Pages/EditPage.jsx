@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import InputBox from "../Components/InputBox";
 
 const EditPage = () => {
   const navigate = useNavigate();
@@ -93,8 +94,10 @@ export default EditPage;
 
 const Wrap = styled.div`
   width: 100%;
-  margin-left: 10%;
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 `;
 
 const Wrapper = styled.div`

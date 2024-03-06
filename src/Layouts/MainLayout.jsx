@@ -23,7 +23,7 @@ const MainLayout = () => {
 export default MainLayout;
 
 const Wrapper = styled.div`
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
 `;
 

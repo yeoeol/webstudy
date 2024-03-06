@@ -33,6 +33,7 @@ const BoardList = () => {
         {boardList.map((post) => (
           <BoardCard
             key={post.boardNum}
+            boardNum={post.boardNum}
             comment={post.comment}
             likeCount={post.likeCount}
             pw={post.pw}
