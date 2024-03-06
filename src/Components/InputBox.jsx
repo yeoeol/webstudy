@@ -16,14 +16,12 @@ const InputBox = () => {
       ...inputData,
       [e.target.name]: e.target.value,
     });
-    // console.log(inputData);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
       inputData.comment &&
       inputData.pw &&
-      // inputData.sector &&
       inputData.title &&
       inputData.userName
     ) {
@@ -36,9 +34,6 @@ const InputBox = () => {
           sector: "",
           title: "",
           userName: "",
-        }).catch((error) => {
-          // Handle error
-          console.error("Error posting data:", error);
         });
       });
     } else {
@@ -57,6 +52,7 @@ const InputBox = () => {
           />
           <PwInput
             name="pw"
+            type="password"
             placeholder="pw"
             value={inputData.pw}
             onChange={handleChange}
@@ -83,14 +79,15 @@ export default InputBox;
 
 const Wrap = styled.div`
   width: 100%;
-  margin-left: 10%;
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
 `;
 
 const Wrapper = styled.div`
   height: 150px;
   width: 80%;
-  /* #e5f0e6; */
   display: flex;
   flex-direction: column;
   align-items: center;
