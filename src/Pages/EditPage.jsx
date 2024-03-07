@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import InputBox from "../Components/InputBox";
+import DropDown from "../Components/Dropdown";
 
 const EditPage = () => {
   const navigate = useNavigate();
@@ -68,6 +69,13 @@ const EditPage = () => {
             value={inputData.pw}
             onChange={handleChange}
           />
+          {/* <DropDown/> */}
+          <SectorInput
+            name="sector"
+            placeholder="sector"
+            value={inputData.sector}
+            onChange={handleChange}
+          />
           <TitleInput
             name="title"
             placeholder="title"
@@ -130,7 +138,11 @@ const NameInput = styled.input`
   width: 30%;
   border: none;
 `;
-
+const SectorInput = styled.input`
+  height: 25px;
+  width: 30%;
+  border: none;
+`;
 const PwInput = styled.input`
   width: 30%;
   height: 25px;

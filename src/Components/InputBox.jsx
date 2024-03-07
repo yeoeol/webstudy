@@ -1,8 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import DropDown from "./Dropdown";
 
 const InputBox = () => {
+  const [genre, setGenre] = useState("");
+  const changeGenre = (genre) => {
+    setGenre(genre);
+  };
+
   const [inputData, setInputData] = useState({
     comment: "",
     likeCount: 0,
@@ -57,6 +63,13 @@ const InputBox = () => {
             value={inputData.pw}
             onChange={handleChange}
           />
+          <SectorInput
+            name="sector"
+            placeholder="sector"
+            value={inputData.sector}
+            onChange={handleChange}
+          />
+          {/* <DropDown changeGenre={changeGenre} /> */}
           <TitleInput
             name="title"
             placeholder="title"
@@ -110,6 +123,11 @@ const Upper = styled.div`
 `;
 
 const NameInput = styled.input`
+  height: 25px;
+  width: 30%;
+  border: none;
+`;
+const SectorInput = styled.input`
   height: 25px;
   width: 30%;
   border: none;

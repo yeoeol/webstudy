@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 import likeImage from "../images/like.png";
 import unlikeImage from "../images/unlike.png";
 
@@ -20,14 +20,41 @@ const BoardCard = ({
   };
   const [like, setLike] = useState(likeCount);
 
-  const handleCount = (num, e) => {
-    setLike((prev) => prev + num);
+  const addCount = async (e) => {
     e.stopPropagation();
+    e.preventDefault();
+    try {
+      await axios.put(`/board/${boardNum}/like`, { like: true });
+      setLike(like + 1);
+    } catch (error) {
+      console.error("Error updating data", error);
+    }
   };
-
-  useEffect(() => {
-    console.log(boardNum);
-  }, []);
+  const minusCount = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    try {
+      await axios.put(`/board/${boardNum}/like`, { like: false });
+      setLike(like - 1);
+    } catch (error) {
+      console.error("Error updating data", error);
+    }
+  };
+  useEffect(() => {});
+  // const checkPw = (e) => {
+  //   e.preventDefault();
+  //   const pw = prompt("비밀번호를 입력하세요 :" + "");
+  //   const data = axios.get(`/board/${boardNum}/check`, { pw: pw });
+  //   console.log(data);
+  //   if (pw === data.data.data.pw) {
+  //     navigate(`/edit/${boardNum}`);
+  //   } else {
+  //     alert("비밀번호를 잘못 입력하셨습니다");
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log(boardNum);
+  // }, []);
 
   return (
     <Card onClick={getEditPage}>
@@ -36,11 +63,11 @@ const BoardCard = ({
       <Title>{title}</Title>
       <Review>{comment}</Review>
       <Buttons>
-        <button onClick={(e) => handleCount(1, e)}>
+        <button onClick={addCount}>
           <img src={likeImage} height="15px" width="15px" alt="좋아요" />
         </button>
         {like}
-        <button onClick={(e) => handleCount(-1, e)}>
+        <button onClick={minusCount}>
           <img src={unlikeImage} height="15px" width="15px" alt="싫어요" />
         </button>
       </Buttons>

@@ -11,11 +11,6 @@ const BoardList = () => {
     console.log(data);
     setBoardList(data.data.data);
   };
-  // useEffect(() => {
-  //   if (boardList.length > 0) {
-  //     console.log(boardList[0].comment);
-  //   }
-  // }, [boardList]);
   useEffect(() => {
     getBoardList();
   }, []);
